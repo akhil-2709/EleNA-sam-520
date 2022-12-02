@@ -1,3 +1,4 @@
+from src.backend.model.NetworkGenerator import NetworkGenerator
 from src.backend.model.ShortestPathAlgorithm import ShortestPathAlgorithm
 from src.util.Util import coordinates_to_address
 from src.util.logger import get_logger
@@ -39,6 +40,11 @@ class DataModel:
                                             self.shortest_path_info.get_start_node(),
                                             self.shortest_path_info.get_end_node(),
                                             self.shortest_path_info.get_total_gain())
+
+    def set_shortest_route_obj(self, start_coordinate, end_coordinate):
+        self.graph = NetworkGenerator().generate_graph_to_end_point(end_coordinate)
+        self.shortest_route_obj = ShortestPathAlgorithm(self.graph)
+        self.shortest_path_info = self.shortest_route_obj.get_shortest_route(start_coordinate, end_coordinate)
 
     def get_algorithm_obj(self):
         return self.algorithm_obj
