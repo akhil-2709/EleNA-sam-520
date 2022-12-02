@@ -84,3 +84,8 @@ def fetch_weight(graph, node_1, node_2, weight_type=NORMAL):
     elif weight_type == ELEVATION_GAIN:
         return max(0.0, graph.nodes[node_2][ELEVATION] - graph.nodes[node_1][ELEVATION])
 
+def update_route_json(coordinates):
+    route_json = {PROPERTIES: {}, GEOMETRY: {}, TYPE: FEATURE}
+    route_json[GEOMETRY][TYPE] = LINESTRING
+    route_json[GEOMETRY][COORDINATES] = coordinates
+    return route_json
