@@ -8,15 +8,91 @@
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css' rel='stylesheet'/>
         <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
-
+        <!-- Route -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <!--stylesheet-->
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+
+        <script type="text/javascript">
+            var access_key = '{{ ACCESS_KEY }}';
+
+            function initialSetting() {
+                const source = document.getElementById("source_manual");
+                source.style.display = 'none';
+
+                const source_map = document.getElementById("source_map");
+                source_map.style.display = 'none';
+            }
+        </script>
     </head>
 
     <body>
         <div>
           <div class="start">
             <h2>Elevation-based Navigation system</h2>
+            <div class="row">
+              <div class="column column1">
+                <button id="manual">Enter Location</button></br>
+                <button id="mapselect">Select on Map</button>
+              </div>
+
+              <div class="column column2">
+                <div>
+                  <label for="elevation" class="ele">Within x% of Shortest path: </label>
+                  <input type="number" name="path_limit" min="0" id="limitingPercent" value=0>
+                </div></br>
+
+                <div id="source_manual">
+                  <label for="manualSourceAddress" class="source">Source: </label>
+                  <input type="text" name="sourceAddress" id="manualSourceAddress">
+                </div>
+                <div id="desti_manual">
+                  <label for="manualDestinationAddress" class="destination">Destination: </label>
+                  <input type="text" name="destinationAddress" id="manualDestinationAddress">
+                </div>
+
+                <div id="source_map">
+                  <p>Source: </p><p id="source"></p>
+                </div></br>
+                <div id="desti_map">
+                  <p>Destination: </p><p id="destination"></p>
+                </div>
+              </div>
+
+              <div class="column column3">
+                <p class="centering head">Elevation Gain</p></br></br>
+                <label for="max">Minimize </label>
+                <input type="radio" id="min" name="minimumMaximum" class="radioMinElevation" value="min"></br>
+                <label for="max">Maximize </label>
+                <input type="radio" id="max" name="minimumMaximum" class="radioMaxElevation" value="max">
+              </div>
+
+              <div class="column column4">
+                <p class="centering head">Algorithm</p></br></br>
+                <label for="AstarAlgorithm">A*</label>
+                <input type="radio" id="AStar" name="algo" class="radioAStar" value="AStar" checked></br>
+
+                <label for="DijkstraAlgorithm">Dijkstra</label>
+                <input type="radio" id="Dijkstra" name="algo" class="radioDijkstra" value="Dijkstra">
+              </div>
+
+              <div class="column column5">
+                <p class="centering head">Shortest Path</p></br></br>
+                <p id="shortestPathDist"></p></br>
+                <p id="shortestPathGain"></p>
+              </div>
+
+              <div class="column column6">
+                <p class="centering head">EleNa</p></br></br>
+                <p id="elenaPathDistance"></p></br>
+                <p id="elenaPathGain"></p>
+              </div>
+            </div>
+
+            <div class="buttons">
+              <button id="reset" class="resetButton">Reset</button>
+              <button id="submit" class="submitButton">Submit</button>
+            </div></br>
           </div>
 
           <div class="end">

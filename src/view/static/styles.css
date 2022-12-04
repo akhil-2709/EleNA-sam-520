@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+body {
+    background-color: black;
+    color: white;
+}
+
+h2 {
+    text-align: center;
+    color: #E6911A;
+    font-family: 'PT Sans Narrow', sans-serif;
+    margin-bottom: 0.5%;
+}
+
+p {
+    display: inline;
+}
+
+.start {
+    height: 33%;
+}
+
+.end {
+    height:67%;
+}
+
+.buttons {
+  margin: auto;
+  width: 10%;
+}
+
+.row{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+}
+.column {
+  padding-top: 2%;
+}
+
+.column1{
+    width: 15%;
+    text-align: center;
+}
+
+.column2{
+    width: 20%;
+    text-align: center;
+}
+
+.column3, .column4{
+    width: 15%;
+    text-align: center;
+}
+
+.column5, .column6{
+    width: 20%;
+    line-height: 14px;
+    text-align: center;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.head{
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.centering{
+    text-align: center;
+}
