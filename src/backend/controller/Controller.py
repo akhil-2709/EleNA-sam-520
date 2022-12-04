@@ -14,3 +14,7 @@ class Controller(ABC):
     @abstractmethod
     def set_mode_of_elevation(self, mode_of_elevation):
         pass
+
+    @abstractmethod
+    def manipulate_data_model(self):
+        pass

@@ -1,4 +1,5 @@
 from src.backend.controller.Controller import *
+from src.backend.model.DijsktraAlgorithm import DijkstraAlgorithm
 
 class DijkstraController(Controller):
 
@@ -26,3 +27,7 @@ class DijkstraController(Controller):
 
     def set_limiting_percent(self,limiting_percent):
         self.limiting_percent = limiting_percent
+
+    def manipulate_data_model(self):
+        self.data_model.set_algorithm(DijkstraAlgorithm)
+        self.data_model.generate_paths(self.source, self.destination, self.limiting_percent, self.mode_of_elevation)
