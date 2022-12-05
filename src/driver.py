@@ -5,20 +5,17 @@ from flask import Flask, request, render_template
 from backend.controller.AstarController import *
 from backend.controller.DijkstraController import *
 from backend.model.DataModel import *
-
 from src.view.View import View
 
-ACCESS_KEY = ''
-GOOGLE_MAP_API_KEY = ''
+ACCESS_KEY = 'pk.eyJ1IjoibXRhayIsImEiOiJja25wNmdyMTMxYm9tMm5wZTlha2lhcmFnIn0.JsFh89MfCIDr32o-1OHmdA'
+GOOGLE_MAP_API_KEY = 'AIzaSyBmQKnCAXug20yc7pj4ZO_kLbZuPLAkwxs'
 gmaps = googlemaps.Client(key=GOOGLE_MAP_API_KEY)
-
 static_folder = "./view/static"
 template_folder = "./view/templates"
-
 static_url_path = ''
 app = Flask(__name__, static_folder=static_folder, template_folder=template_folder, static_url_path=static_url_path)
 app.config.from_object(__name__)
-app.config.from_envvar('APP_CONFIG_FILE', silent=False)
+app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 
 SOURCE_CORDINATES = 'source_coordinates'
 DESTINATION_CORDINATES = 'destination_coordinates'
@@ -49,7 +46,7 @@ def get_controller_obj(algo):
 
 @app.route('/path_via_pointers', methods=['POST'])
 def get_route():
-    json_output = request.get_json(force)
+    json_output = request.get_json(force=True)
     LOGGER.info(f"Request: {json_output}")
     source_coords = json.loads(json_output[SOURCE_CORDINATES])
     destination_coords = json.loads(json_output[DESTINATION_CORDINATES])
@@ -78,14 +75,20 @@ def convert_address_to_coordinates(location_name):
 
 @app.route('/path_via_address', methods=['POST'])
 def get_routes_via_address():
-    json_output = request.get_json(force)
+    json_output = request.get_json(force=True)
+    LOGGER.info(f"Request: {json_output}")
     start_address = json_output[MANUAL_SOURCE_ADDRESS]
+
+    LOGGER.info("HELLO= ====================")
     end_address = json_output[MANUAL_DESTINATION_ADDRESS]
 
     geocode_result = gmaps.geocode(start_address)
+    print("geocode result",geocode_result)
     source_point = geocode_result[0]['geometry']['location'][LATITUDE], geocode_result[0]['geometry']['location'][LONGITUDE]
     geocode_result = gmaps.geocode(end_address)
     destination_point = geocode_result[0]['geometry']['location'][LATITUDE], geocode_result[0]['geometry']['location'][LONGITUDE]
+    LOGGER.info(f"Souce: {source_point}")
+    LOGGER.info(f"Destination: {destination_point}")
 
     path_limit = float(json_output[LIMITING_PERCENT])
     elevation_strategy = json_output[MIN_MAX]
