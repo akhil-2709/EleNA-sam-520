@@ -20,9 +20,17 @@
                 const source = document.getElementById("source_manual");
                 source.style.display = 'none';
 
+                const destination = document.getElementById("desti_manual");
+                destination.style.display = 'none';
+
                 const source_map = document.getElementById("source_map");
                 source_map.style.display = 'none';
+
+                const dest_map = document.getElementById("desti_map");
+                dest_map.style.display = 'none';
             }
+
+            window.onload = initialSetting;
         </script>
     </head>
 
@@ -32,8 +40,8 @@
             <h2>Elevation-based Navigation system</h2>
             <div class="row">
               <div class="column column1">
-                <button id="manual">Enter Location</button></br>
-                <button id="mapselect">Select on Map</button>
+                <button id="manual" class="manbutton">Enter Location</button></br>
+                <button id="mapselect" class="manbutton">Select on Map</button>
               </div>
 
               <div class="column column2">
@@ -62,7 +70,7 @@
               <div class="column column3">
                 <p class="centering head">Elevation Gain</p></br></br>
                 <label for="max">Minimize </label>
-                <input type="radio" id="min" name="minimumMaximum" class="radioMinElevation" value="min"></br>
+                <input type="radio" id="min" name="minimumMaximum" class="radioMinElevation" value="min" checked></br>
                 <label for="max">Maximize </label>
                 <input type="radio" id="max" name="minimumMaximum" class="radioMaxElevation" value="max">
               </div>
@@ -78,20 +86,24 @@
 
               <div class="column column5">
                 <p class="centering head">Shortest Path</p></br></br>
+                <p>Distance: </p>
                 <p id="shortestPathDist"></p></br>
+                <p>Elevation Gain:</p>
                 <p id="shortestPathGain"></p>
               </div>
 
               <div class="column column6">
                 <p class="centering head">EleNa</p></br></br>
+                <p>Distance:</p>
                 <p id="elenaPathDistance"></p></br>
+                <p>Elevation Gain: </p>
                 <p id="elenaPathGain"></p>
               </div>
             </div>
 
             <div class="buttons">
-              <button id="reset" class="resetButton">Reset</button>
-              <button id="submit" class="submitButton">Submit</button>
+              <button id="reset" class="resetButton manbutton">Reset</button>
+              <button id="submit" class="submitButton manbutton">Submit</button>
             </div></br>
           </div>
 

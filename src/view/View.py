@@ -27,7 +27,7 @@ class View:
     def __init__(self):
         self.output_json = {}
 
-    def update_notifier(self, shortest_route, elevation_route, starting_point, ending_point):
+    def update_notifier(self, shortest_route=None, elevation_route=None, starting_point=None, ending_point=None):
         self.output_json = {ELEV_PATH_ROUTE: update_route_json(elevation_route.get_path()),
                             SHORTEST_PATH_ROUTE: update_route_json(shortest_route.get_path()),
                             SHORTEST_PATH_DIST: shortest_route.get_distance(),
@@ -39,7 +39,12 @@ class View:
                             ELEV_PATH_GAIN: elevation_route.get_total_gain(),
                             ELEV_PATH_DROP: elevation_route.get_total_drop()}
 
+        if len(elevation_route.get_path()) == 0:
             self.output_json[BOOL_POP] = 1
+        else:
+            self.output_json[BOOL_POP] = 2
 
     def fetch_json_output(self):
+
+        print('Sending output - ', self.output_json)
         return json.dumps(self.output_json)
