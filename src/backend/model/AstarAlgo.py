@@ -78,6 +78,9 @@ class AstarAlgo:
         shortest_path.set_path([[graph.nodes[route_node]['x'], graph.nodes[route_node]['y']]
                                 for route_node in self.elevation_path])
 
+        shortest_path.set_distance(
+            sum(ox.utils_graph.get_route_edge_attributes(graph, self.elevation_path, 'length')))
+
         LOGGER.info("Returning the shortest path using the Astar Algorithm")
         LOGGER.info(f"shortest_path: {shortest_path}")
         return shortest_path
