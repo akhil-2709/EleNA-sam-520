@@ -2,9 +2,9 @@ import json
 
 import googlemaps
 from flask import Flask, request, render_template
-from backend.controller.AstarController import *
-from backend.controller.DijkstraController import *
-from backend.model.DataModel import *
+from src.backend.controller.AstarController import *
+from src.backend.controller.DijkstraController import *
+from src.backend.model.DataModel import *
 from src.view.View import View
 
 ACCESS_KEY = 'pk.eyJ1IjoibXRhayIsImEiOiJja25wNmdyMTMxYm9tMm5wZTlha2lhcmFnIn0.JsFh89MfCIDr32o-1OHmdA'
