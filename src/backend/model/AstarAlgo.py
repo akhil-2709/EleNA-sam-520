@@ -11,6 +11,9 @@ ASTAR_ALGORITHM = "AStar"
 DISTANCE_FROM_DESTINATION = 'dist_from_dest'
 
 class AstarAlgo:
+    """
+       This class is used to calculate the shortest route using the Astar Algorithm and also considering the elevation gain.
+    """
     def __init__(self, graph, shortest_dist, limiting_percent, mode_of_elevation, start_node, end_node,
                  elevation_gain):
         self.graph = graph
@@ -28,6 +31,12 @@ class AstarAlgo:
         return self.graph.nodes[a][DISTANCE_FROM_DESTINATION] * 1 / self.scale
 
     def get_shortest_route(self):
+        """
+                This method takes into consideration the weights and elevation gain into account and calculates the shortest route.
+
+                Returns:
+                ShortestPath route
+        """
         graph = self.graph
         self.elevation_path = nx.shortest_path(graph, source=self.start_node, target=self.end_node,
                                                weight='length')

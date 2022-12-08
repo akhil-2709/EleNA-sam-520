@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-
+"""
+    This class is an abstract controller and has methods to be implemented by children classes
+"""
 class Controller(ABC):
 
     def __init__(self):

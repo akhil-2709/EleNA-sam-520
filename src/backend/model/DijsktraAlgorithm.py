@@ -13,6 +13,9 @@ ELEVATION_GAIN = "elevation_gain"
 ASTAR_ALGORITHM = "AStar"
 
 class DijkstraAlgorithm:
+    """
+       This class is used to calculate the shortest route using the Dijkstra's Algorithm and also considering the elevation gain.
+    """
     def __init__(self, graph, shortest_dist, limiting_percent, elevation_mode, start_node, end_node,
                  elevation_gain):
         self.graph = graph
@@ -26,6 +29,12 @@ class DijkstraAlgorithm:
         self.elevation_distance = None
         self.elevation_gain = elevation_gain
     def get_shortest_route(self):
+        """
+                This method takes into consideration the weights and elevation gain into account and calculates the shortest route.
+
+                Returns:
+                ShortestPath route
+        """
         graph = self.graph
 
         self.elevation_route = nx.shortest_path(graph, source=self.start_node, target=self.end_node,

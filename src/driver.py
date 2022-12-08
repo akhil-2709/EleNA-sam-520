@@ -30,6 +30,12 @@ DIJKSTRA_ALGO = 'DijkstraAlgorithm'
 
 @app.route('/view')
 def client():
+    """
+        This renders the user interface
+
+        Returns:
+            Renders the template for UI
+    """
     return render_template(
         'view.html',
         ACCESS_KEY=ACCESS_KEY
@@ -37,6 +43,15 @@ def client():
 
 
 def get_controller_obj(algo):
+    """
+        Assigning controller object based on algorithm selected
+
+        Args:
+            algo: The algorithm selected by the user in the UI (AstarAlgorithm or DijkstraAlgorithm)
+
+        Returns:
+            Controller object to be used for further processing
+    """
     if algo == "DijkstraAlgorithm":
         controller = DijkstraController()
     else:
@@ -46,6 +61,13 @@ def get_controller_obj(algo):
 
 @app.route('/path_via_pointers', methods=['POST'])
 def get_route():
+    """
+        This method assigns the values from the user selection on the map to parameters,
+        initiates the controller and model, gets the best route details that will be shown finally
+
+        Returns:
+            Gets the view that is rendered to the user
+    """
     json_output = request.get_json(force=True)
     LOGGER.info(f"Request: {json_output}")
     source_coords = json.loads(json_output[SOURCE_CORDINATES])
@@ -69,17 +91,32 @@ def get_route():
 
 
 def convert_address_to_coordinates(location_name):
+    """
+        This method converts the user entered address into coordinates
+
+        Args:
+            location_name: The user entered address
+
+        Returns:
+            The latitude and longitude values of the user entered address(location_name)
+    """
     geocode_result = gmaps.geocode(location_name)
     return geocode_result[0]['geometry']['location'][LATITUDE], geocode_result[0]['geometry']['location'][LONGITUDE]
 
 
 @app.route('/path_via_address', methods=['POST'])
 def get_routes_via_address():
+    """
+        This method assigns the values from the user input fields(source and destination) in the UI to parameters,
+        initiates the controller and model, gets the best route details that will be shown finally
+
+        Returns:
+            Gets the view that is rendered to the user
+    """
     json_output = request.get_json(force=True)
     LOGGER.info(f"Request: {json_output}")
     start_address = json_output[MANUAL_SOURCE_ADDRESS]
 
-    LOGGER.info("HELLO= ====================")
     end_address = json_output[MANUAL_DESTINATION_ADDRESS]
 
     geocode_result = gmaps.geocode(start_address)

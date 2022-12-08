@@ -21,6 +21,19 @@ LINESTRING = "LineString"
 
 
 def astar_algorithm(graph, source, target, heuristic, weight):
+     """
+    This method computes the shortest path between source and target using astar algorithm and returns the nodes in this path
+
+    Args:
+        graph: NetworkX graph
+        source: Starting node in the path
+        target: Destination node in the path
+        heuristic: Provides an estimate of the minimum cost between the given nodes
+        weight: Used to pass the edge weights
+
+    Returns:
+    The nodes in the shortest path between source and target
+    """
     if source not in graph or target not in graph:
         print("Graph doesn't contain either source or destination")
 
@@ -64,10 +77,30 @@ def astar_algorithm(graph, source, target, heuristic, weight):
 
 
 def coordinates_to_address(coordinates):
+    """
+    This method retrieves the address from the supplied coordinates
+
+    Args:
+        coordinates: latitude and longitude details
+
+    Returns:
+        Address corresponding to the input coordinates
+    """
     return Nominatim(user_agent="myGeocoder").reverse(coordinates).address
 
 
 def fetch_path_weight(graph, path, weight):
+    """
+    Fetches the path weight
+
+    Args:
+        graph: graph object
+        path: route
+        weight: weight
+
+    Returns:
+        total weight computed based on the path and weight params
+    """
     total_weight = 0
     path_length = len(path) - 1
     for i in range(path_length):
@@ -76,6 +109,18 @@ def fetch_path_weight(graph, path, weight):
 
 
 def fetch_weight(graph, node_1, node_2, weight_type=NORMAL):
+    """
+    This method calculates the edge weight based on the length or elevation gain of the path
+
+    Args:
+        graph: graph object
+        node_1: source node
+        node_2: destination node
+        weight_type: normal/elevation (by default NORMAL)
+
+    Returns:
+        Edge weight of the edge connecting node_1 and node_2
+    """
     if weight_type == NORMAL:
         try:
             return graph.edges[node_1, node_2, 0][LENGTH]
@@ -85,6 +130,15 @@ def fetch_weight(graph, node_1, node_2, weight_type=NORMAL):
         return max(0.0, graph.nodes[node_2][ELEVATION] - graph.nodes[node_1][ELEVATION])
 
 def update_route_json(coordinates):
+    """
+    This method updates the route json with the input values
+
+    Args:
+        coordinates: input coordinates
+
+    Returns:
+        An updated route json
+    """
     route_json = {PROPERTIES: {}, GEOMETRY: {}, TYPE: FEATURE}
     route_json[GEOMETRY][TYPE] = LINESTRING
     route_json[GEOMETRY][COORDINATES] = coordinates

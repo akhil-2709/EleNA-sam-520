@@ -7,6 +7,10 @@ LOGGER = get_logger(__name__)
 
 
 class DataModel:
+    """
+        This class initializes critical parameters such the graph,the algorithm,the path_limit  etc.It contains methods to register the
+        observer,set the algorithm,set the algorithm object,print the route information etc and also it notifies the observers.
+    """
     def __init__(self):
         self.map_api_key = None
         self.graph = None

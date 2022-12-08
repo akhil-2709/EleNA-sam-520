@@ -1,6 +1,9 @@
 from src.backend.controller.Controller import *
 from src.backend.model.DijsktraAlgorithm import DijkstraAlgorithm
-
+"""
+   This controller is implements Dijkstra Algorithm which gives the shortest path between source and destination taking 
+   elevation into consideration
+"""
 class DijkstraController(Controller):
 
     def __init__(self):

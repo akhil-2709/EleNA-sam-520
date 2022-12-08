@@ -10,6 +10,9 @@ SHORTEST = "Shortest Route"
 LOGGER = get_logger(__name__)
 
 class ShortestPathAlgorithm:
+    """
+           This class is used to calculate the shortest route without considering the elevation gain
+    """
 
     def __init__(self, graph):
         self.graph = graph
@@ -19,6 +22,15 @@ class ShortestPathAlgorithm:
         self.short_distance = None
 
     def get_shortest_route(self, start, end):
+        """
+                This method is used to calculate the shortest path without considering any elevation gain like a normal map .
+                Args:
+                    source_point
+                    destination_point
+
+                Returns:
+                    shortest_path route
+        """
 
         graph = self.graph
         self.source, self.destination = None, None
