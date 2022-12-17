@@ -7,7 +7,7 @@ Hikers and joggers can use the application to select the workout types from easy
 <img width="804" alt="Screenshot 2022-11-03 at 10 16 21 AM" src="https://user-images.githubusercontent.com/47236863/199744653-d739dd19-8622-4c7f-bc2f-12fa36cdd888.png">
 
 # User Interface
-![frontend_ui.jpeg](frontend_ui.jpeg)
+![frontend_ui](https://user-images.githubusercontent.com/100547384/208225559-2889799c-f5c0-47e1-861e-be4f06ea78ef.jpeg)
 
 # Pre-reqs
 ### Installing the python modules for running the application
