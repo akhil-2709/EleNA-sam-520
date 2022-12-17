@@ -7,7 +7,7 @@ class Controller(ABC):
     def __init__(self):
         self.data_model = None
         self.observer = None
-        self.elevation_strategy = None
+        self.mode_of_elevation = None
 
     @abstractmethod
     def set_data_model(self, data_model):

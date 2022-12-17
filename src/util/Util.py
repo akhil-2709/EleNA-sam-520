@@ -21,7 +21,7 @@ LINESTRING = "LineString"
 
 
 def astar_algorithm(graph, source, target, heuristic, weight):
-     """
+    """
     This method computes the shortest path between source and target using astar algorithm and returns the nodes in this path
 
     Args:

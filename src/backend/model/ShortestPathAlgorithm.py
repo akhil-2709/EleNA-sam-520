@@ -45,10 +45,10 @@ class ShortestPathAlgorithm:
         LOGGER.info("Calculated the shortest path between source and destination with considering elevation")
 
         shortest_path_info = RouteData()
+        shortest_path_info.set_start_node(self.source)
         shortest_path_info.set_end_node(self.destination)
         shortest_path_info.set_algo(SHORTEST)
         shortest_path_info.set_total_gain(fetch_path_weight(self.graph, self.short_path, ELEVATION_GAIN))
-        shortest_path_info.set_start_node(self.source)
         shortest_path_info.set_total_drop(0)
         shortest_path_info.set_path([[graph.nodes[route_node]['x'], graph.nodes[route_node]['y']]
                                      for route_node in self.short_path])

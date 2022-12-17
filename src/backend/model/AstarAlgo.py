@@ -54,11 +54,12 @@ class AstarAlgo:
                                                  + math.exp(1 / self.scale * (d[0]['length'])))
 
                 elevation_distance = sum(ox.utils_graph.get_route_edge_attributes(graph, elevation_path, 'length'))
-                elevation_gain = fetch_path_weight(self.graph, elevation_path, ELEVATION_GAIN)
+                elevation_gain_1 = fetch_path_weight(self.graph, elevation_path, ELEVATION_GAIN)
                 if elevation_distance <= (1 + self.limiting_percent) * self.shortest_dist and \
-                        1 * elevation_gain <= 1 * self.shortest_path_elevation_gain:
+                        1 * elevation_gain_1 <= 1 * self.elevation_gain:
                     self.elevation_path = elevation_path
-                    self.shortest_path_elevation_gain = elevation_gain
+                    self.elevation_gain = elevation_gain_1
+                LOGGER.info("elevation gain:", self.elevation_gain)
                 self.scale *= 5
 
         else:
@@ -73,11 +74,11 @@ class AstarAlgo:
                                                  + math.exp(1 / self.scale * (d[0]['length'])))
 
                 elevation_distance = sum(ox.utils_graph.get_route_edge_attributes(graph, elevation_path, 'length'))
-                elevation_gain = fetch_path_weight(self.graph, elevation_path, ELEVATION_GAIN)
-                if elevation_distance <= (-1 + self.limiting_percent) * self.shortest_dist and \
-                        -1 * elevation_gain <= -1 * self.elevation_gain:
+                elevation_gain_1 = fetch_path_weight(self.graph, elevation_path, ELEVATION_GAIN)
+                if elevation_distance <= (1 + self.limiting_percent) * self.shortest_dist and \
+                        -1 * elevation_gain_1 <= -1 * self.elevation_gain:
                     self.elevation_path = elevation_path
-                    self.elevation_gain = elevation_gain
+                    self.elevation_gain = elevation_gain_1
                 self.scale *= 5
 
         shortest_path = RouteData()

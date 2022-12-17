@@ -69,6 +69,7 @@ def get_route():
             Gets the view that is rendered to the user
     """
     json_output = request.get_json(force=True)
+    #json_output  = json_output = {'source_coordinates': '{"lng":-72.51656706958646,"lat":42.39523966495432}', 'destination_coordinates': '{"lng":-72.6721179235554,"lat":42.33433826565226}', 'minimum_maximum': 'max', 'algo': 'AStar', 'limiting_percent': '10'}
     LOGGER.info(f"Request: {json_output}")
     source_coords = json.loads(json_output[SOURCE_CORDINATES])
     destination_coords = json.loads(json_output[DESTINATION_CORDINATES])
@@ -80,7 +81,7 @@ def get_route():
     data_model = DataModel()
     view = View()
     data_model.register_observer(view)
-    controller = get_controller_obj("DIJKSTRA_ALGO")
+    controller = get_controller_obj(algorithm)
     controller.set_data_model(data_model)
     controller.set_source_point(source_point)
     controller.set_destination_point(destination_point)
@@ -114,6 +115,7 @@ def get_routes_via_address():
             Gets the view that is rendered to the user
     """
     json_output = request.get_json(force=True)
+    #json_output = json_output = {'source_coordinates': '{"lng":-72.51656706958646,"lat":42.39523966495432}', 'destination_coordinates': '{"lng":-72.6721179235554,"lat":42.33433826565226}', 'minimum_maximum': 'max', 'algo': 'AStar', 'limiting_percent': '10'}
     LOGGER.info(f"Request: {json_output}")
     start_address = json_output[MANUAL_SOURCE_ADDRESS]
 
@@ -133,7 +135,7 @@ def get_routes_via_address():
     data_model = DataModel()
     view = View()
     data_model.register_observer(view)
-    controller = get_controller_obj("DIJKSTRA_ALGO")
+    controller = get_controller_obj(algorithm)
     controller.set_data_model(data_model)
     controller.set_limiting_percent(path_limit)
     controller.set_mode_of_elevation(elevation_strategy)

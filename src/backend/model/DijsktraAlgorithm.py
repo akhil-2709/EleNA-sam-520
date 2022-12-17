@@ -54,11 +54,11 @@ class DijkstraAlgorithm:
                                                   + math.exp(1 / self.scale * (d[0]['length'])))
 
                 elevation_distance = sum(ox.utils_graph.get_route_edge_attributes(graph, elevation_route, 'length'))
-                elevation_gain = fetch_path_weight(self.graph, elevation_route, ELEVATION_GAIN)
+                elevation_gain_1 = fetch_path_weight(self.graph, elevation_route, ELEVATION_GAIN)
                 if elevation_distance <= (1 + self.limiting_percent) * self.shortest_dist and \
-                        1 * elevation_gain <= 1 * self.shortest_path_elevation_gain:
+                        1 * elevation_gain_1 <= 1 * self.elevation_gain:
                     self.elevation_route = elevation_route
-                    self.shortest_path_elevation_gain = elevation_gain
+                    self.elevation_gain = elevation_gain_1
                 self.scale *= 5
 
         else:
@@ -74,11 +74,11 @@ class DijkstraAlgorithm:
                                                   + math.exp(1 / self.scale * (d[0]['length'])))
 
                 elevation_distance = sum(ox.utils_graph.get_route_edge_attributes(graph, elevation_route, 'length'))
-                elevation_gain = fetch_path_weight(self.graph, elevation_route, ELEVATION_GAIN)
-                if elevation_distance <= (-1 + self.limiting_percent) * self.shortest_dist and \
-                        -1 * elevation_gain <= -1 * self.shortest_path_elevation_gain:
+                elevation_gain_1 = fetch_path_weight(self.graph, elevation_route, ELEVATION_GAIN)
+                if elevation_distance <= (1 + self.limiting_percent) * self.shortest_dist and \
+                        -1 * elevation_gain_1 <= -1 * self.elevation_gain:
                     self.elevation_route = elevation_route
-                    self.elevation_gain = elevation_gain
+                    self.elevation_gain = elevation_gain_1
                 self.scale *= 5
 
         shortest_path = RouteData()
