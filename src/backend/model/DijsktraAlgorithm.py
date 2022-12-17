@@ -11,6 +11,7 @@ from src.util.logger import get_logger
 LOGGER = get_logger(__name__)
 ELEVATION_GAIN = "elevation_gain"
 ASTAR_ALGORITHM = "AStar"
+DIJKSTRA_ALGORITHM = "DijkstraAlgorithm"
 
 class DijkstraAlgorithm:
     """
@@ -41,6 +42,7 @@ class DijkstraAlgorithm:
                                                 weight='length')
 
         # calculating the elevation gain and distance based on user selected min or max gain
+        LOGGER.info(f"dijkstra elevation_mode: {self.elevation_mode}")
         if self.elevation_mode == min:
             while self.scale < 10000:
                 # Dijkstra is a special case of AStar algorithm when the heuristic is set to None
@@ -82,7 +84,7 @@ class DijkstraAlgorithm:
                 self.scale *= 5
 
         shortest_path = RouteData()
-        shortest_path.set_algo(ASTAR_ALGORITHM)
+        shortest_path.set_algo(DIJKSTRA_ALGORITHM)
         shortest_path.set_total_gain(fetch_path_weight(self.graph, self.elevation_route, ELEVATION_GAIN))
         shortest_path.set_total_drop(0)
         shortest_path.set_path([[graph.nodes[route_node]['x'], graph.nodes[route_node]['y']]

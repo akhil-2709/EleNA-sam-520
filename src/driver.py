@@ -52,6 +52,7 @@ def get_controller_obj(algo):
         Returns:
             Controller object to be used for further processing
     """
+    LOGGER.info(f"algo from driver: {algo}")
     if algo == "DijkstraAlgorithm":
         controller = DijkstraController()
     else:
